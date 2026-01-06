@@ -1,3 +1,21 @@
+Note: This installation Step can be done in Virtual machine or on containers. I manuall created 4 containers using incus.
+
+Use below command inside your VM
+Command: ssh-keygen -t ed25519 -C "router"
+By default, this creates two files:
+
+~/.ssh/id_ed25519 (private key)
+
+~/.ssh/id_ed25519.pub (public key)
+
+Copy the public key to your container:
+Add the contents of your public key (id_ed25519.pub) to the container’s ~/.ssh/authorized_keys
+
+Change Permission:
+chown -R ubuntu:ubuntu /home/ubuntu/.ssh
+chmod 700 /home/ubuntu/.ssh
+chmod 600 /home/ubuntu/.ssh/authorized_keys
+
 # Ansible Role: prometheus
 
 This Ansible role installs and configures **Prometheus** on a Linux host using the
