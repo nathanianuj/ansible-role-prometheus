@@ -1,0 +1,40 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+
+scrape_configs:
+  - job_name: 'snmp'
+    scrape_interval: 30s
+    scrape_timeout: 20s
+    metrics_path: /snmp
+    params:
+      module: [snmpv3_switch]
+      auth: [public_v3]
+    static_configs:
+      - targets:
+          - '{{ snmp_target }}'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: '{{ snmp_exporter }}'
+
+    metric_relabel_configs:
+      - source_labels: [ifIndex]
+        regex: '(.*)'
+        target_label: interface
+      - source_labels: [__name__]
+        regex: '^if(HC)?(In|Out)Octets$'
+        action: keep
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - '{{ alertmanager_target }}'
+
+rule_files:
+  - /etc/prometheus/alerts.yml

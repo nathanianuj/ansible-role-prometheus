@@ -1,0 +1,6 @@
+prometheus_version: "2.54.1"
+
+snmp_target: "10.12.242.150"
+snmp_exporter: "10.12.242.206:9116"
+
+alertmanager_target: "10.12.242.213:9093"

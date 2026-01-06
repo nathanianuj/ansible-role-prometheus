@@ -1,0 +1,14 @@
+groups:
+  - name: SNMP Switch Alerts
+    rules:
+      - alert: SwitchDown
+        expr: up{job="snmp"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "SNMP Switch is down"
+          description: >-
+            {% raw %}
+            The SNMP switch ({{ $labels.instance }}) is not responding.
+            {% endraw %}

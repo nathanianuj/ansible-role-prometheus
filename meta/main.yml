@@ -1,0 +1,33 @@
+galaxy_info:
+  role_name: prometheus
+  author: Anuj Nathani
+  description: >
+    Installs and configures Prometheus using the official binary release.
+    Includes SNMP monitoring via Prometheus SNMP Exporter and alert rule
+    integration with Alertmanager.
+
+  company: ""
+  license: MIT
+  min_ansible_version: "2.12"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+
+  galaxy_tags:
+    - prometheus
+    - monitoring
+    - snmp
+    - snmpv3
+    - metrics
+    - alerting
+    - observability
+    - devops
+
+dependencies: []
